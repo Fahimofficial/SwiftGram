@@ -13,3 +13,28 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Per-module build directories
+**/build/
+
+# Secrets and credentials — DO NOT COMMIT
+# Firebase config (contains API keys that, while restricted, should not be public)
+google-services.json
+**/google-services.json
+# Firebase admin / service account JSON
+firebase-*.json
+*-firebase-adminsdk-*.json
+# Release signing
+*.jks
+*.keystore
+*.p12
+*.pfx
+keystore.properties
+signing.properties
+release.properties
+# Gradle properties frequently used to stash signing creds
+/gradle.properties
+# Env files
+.env
+.env.*
+!.env.example

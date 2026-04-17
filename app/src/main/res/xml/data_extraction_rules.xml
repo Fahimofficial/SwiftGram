@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 12+ data extraction rules. Covers both cloud backup and
+  device-to-device transfer. As with `backup_rules.xml`, the app-level
+  `android:allowBackup="false"` already suppresses both, and this file
+  is defence-in-depth.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="file" path="tdlib/" />
+        <exclude domain="file" path="tdlib_files/" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="file" path="tdlib/" />
+        <exclude domain="file" path="tdlib_files/" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </device-transfer>
+</data-extraction-rules>

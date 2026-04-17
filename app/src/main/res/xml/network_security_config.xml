@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Disables cleartext traffic across the entire app, including for media
+  URLs loaded via Coil and any future API calls. Overrides the Android
+  platform default for devices below API 28, where cleartext is
+  otherwise permitted.
+
+  When production Telegram / TDLib endpoints are known, add a
+  <pin-set> here with their SPKI pins so that a compromised CA cannot
+  MITM the session.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <!--
+      No per-domain overrides. If a future debug-only endpoint needs
+      cleartext (e.g. `10.0.2.2` for an emulator), add it under
+      `debug-overrides` rather than relaxing the base config.
+    -->
+</network-security-config>

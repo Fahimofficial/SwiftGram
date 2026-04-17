@@ -308,13 +308,26 @@ jobs:
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
-        echo $KEYSTORE_BASE64 | base64 --decode > app/release.jks
-        jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-          -keystore app/release.jks \
-          -storepass $KEYSTORE_PASSWORD \
-          -keypass $KEY_PASSWORD \
-          app/build/outputs/apk/release/app-release-unsigned.apk $KEY_ALIAS
-        zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release-signed.apk
+        # Use printf (not echo) so backslashes in the base64 blob aren't
+        # interpreted, and pipe to base64 -d rather than placing the secret
+        # on the command line. Quote every secret expansion.
+        printf '%s' "$KEYSTORE_BASE64" | base64 -d > app/release.jks
+        # Use apksigner (APK Signature Scheme v2/v3) with SHA-256, not
+        # jarsigner/SHA-1. Play Store has required v2+ for new apps since
+        # August 2021, and SHA-1 is deprecated.
+        zipalign -v 4 \
+          app/build/outputs/apk/release/app-release-unsigned.apk \
+          app/build/outputs/apk/release/app-release-aligned.apk
+        "$ANDROID_SDK_ROOT/build-tools/34.0.0/apksigner" sign \
+          --ks app/release.jks \
+          --ks-key-alias "$KEY_ALIAS" \
+          --ks-pass "pass:$KEYSTORE_PASSWORD" \
+          --key-pass "pass:$KEY_PASSWORD" \
+          --out app/build/outputs/apk/release/app-release-signed.apk \
+          app/build/outputs/apk/release/app-release-aligned.apk
+        # Scrub the keystore from the runner's disk even though the VM is
+        # ephemeral — this is belt-and-braces.
+        shred -u app/release.jks || rm -f app/release.jks
 
     - name: Upload release APK artifact (if tag push)
       if: startsWith(github.ref, 'refs/tags/v')

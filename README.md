@@ -69,6 +69,8 @@ The debug APK will be located at `app/build/outputs/apk/debug/app-debug.apk`.
 #### Release Build
 For a release build, you will need to set up signing configurations. This typically involves creating a keystore and configuring it in your `app/build.gradle.kts`.
 
+**Never commit your keystore or its password.** The repository's `.gitignore` excludes `*.jks`, `*.keystore`, `keystore.properties`, `signing.properties`, and `/gradle.properties` for this reason. Load signing credentials from environment variables (in CI) or from a local `keystore.properties` file (locally) — not from `build.gradle.kts` literals.
+
 **Note**: The GitHub Actions workflow automatically generates signed release APKs on version tag pushes. Refer to the CI/CD section for more details.
 
 ```bash

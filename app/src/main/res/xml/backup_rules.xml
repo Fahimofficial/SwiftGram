@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Legacy auto-backup rules (Android 6 – 11). The app-level
+  `android:allowBackup="false"` already disables auto-backup entirely,
+  but these exclusions are kept as a defence-in-depth in case a future
+  change flips `allowBackup` to `true`. Nothing related to Telegram
+  session state, TDLib data, or cached messages should ever be
+  backed up to Google Drive.
+-->
+<full-backup-content>
+    <exclude domain="root" />
+    <exclude domain="file" path="tdlib/" />
+    <exclude domain="file" path="tdlib_files/" />
+    <exclude domain="database" />
+    <exclude domain="sharedpref" />
+    <exclude domain="external" />
+</full-backup-content>
