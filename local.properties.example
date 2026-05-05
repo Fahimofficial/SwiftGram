@@ -1,0 +1,13 @@
+# Telegram API Credentials (from https://my.telegram.org/apps)
+# DO NOT commit the actual local.properties file to version control
+# Copy this file to local.properties and fill in your actual credentials
+
+# Your Telegram API ID (integer)
+telegram.api.id=0
+
+# Your Telegram API Hash (string)
+telegram.api.hash=
+
+# Example (replace with your actual credentials from https://my.telegram.org/apps):
+# telegram.api.id=123456
+# telegram.api.hash=abcdef1234567890abcdef1234567890

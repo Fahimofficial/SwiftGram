@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Gradient background -->
+    <path
+        android:fillColor="#0088CC"
+        android:pathData="M0,0 L108,0 L108,108 L0,108 Z" />
+    
+    <!-- Accent elements -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.1"
+        android:pathData="M0,0 Q54,27 108,0 L108,108 Q54,81 0,108 Z" />
+</vector>

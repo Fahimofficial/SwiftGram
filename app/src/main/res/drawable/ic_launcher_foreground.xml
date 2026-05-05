@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Paper plane icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 27 43 L 70 54 L 27 65 L 27 85 L 86 54 L 27 23 Z" />
+    
+    <!-- Accent highlight for depth -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.4"
+        android:pathData="M 27 43 L 48 54 L 27 65 Z" />
+</vector>
